@@ -12,25 +12,35 @@
        <div class='block2'>
             <b-navbar toggleable="lg" type="light" variant="light">
                 <b-navbar-nav>
-                    <b-nav-item href="#">Requests</b-nav-item>
+                    <b-nav-item href="#" name='request' value='req'>Requests</b-nav-item>
                     <b-nav-item>|</b-nav-item>
-                    <b-nav-item href="#" >Ngo's</b-nav-item>
+                    <b-nav-item href="#" name='ngo' value='ngo'>Ngo's</b-nav-item>
                 </b-navbar-nav>
             </b-navbar>
        </div>
        <div class='block3'>
-           
+           <app-request></app-request>
+           <app-ngolist></app-ngolist>
        </div>
   </div>
 </template>
 
 <script>
 import ngokids from '../../assets/ngo.jpg'
+import Requests from './Request.vue'
+import NgoList from './Ngo.vue'
 export default {
     data(){
         return{
             ngokids
         }
+    },
+    components:{
+        'app-request':Requests,
+        'app-ngolist':NgoList
+    },
+    stateChange: function(){
+        
     }
 
 }
@@ -59,6 +69,9 @@ export default {
     font-size: 2em;
     margin-left: 2%;
     margin-right: 2%;
+}
+.block3{
+    
 }
 
 </style>
