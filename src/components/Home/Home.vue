@@ -12,15 +12,18 @@
        <div class='block2'>
             <b-navbar toggleable="lg" type="light" variant="light">
                 <b-navbar-nav>
-                    <b-nav-item href="#" name='request' value='req'>Requests</b-nav-item>
-                    <b-nav-item>|</b-nav-item>
-                    <b-nav-item href="#" name='ngo' value='ngo'>Ngo's</b-nav-item>
+                    <b-nav-item href="#" name='request' value='req' v-on:click="requestCard">Go to {{name}}</b-nav-item>
+                    
                 </b-navbar-nav>
             </b-navbar>
        </div>
        <div class='block3'>
-           <app-request></app-request>
-           <app-ngolist></app-ngolist>
+           <div v-if="req">
+               <app-request></app-request>
+           </div>
+           <div v-if="ngo">
+               <app-ngolist></app-ngolist>
+           </div>
        </div>
   </div>
 </template>
@@ -30,17 +33,33 @@ import ngokids from '../../assets/ngo.jpg'
 import Requests from './Request.vue'
 import NgoList from './Ngo.vue'
 export default {
+    name:"Home",
+    
     data(){
         return{
-            ngokids
+            ngokids,
+            ngo :true,
+            req:false,
+            name:"Request's",
+            dummyname:""
         }
     },
+    
     components:{
         'app-request':Requests,
         'app-ngolist':NgoList
     },
-    stateChange: function(){
-        
+    methods:{
+        requestCard(){
+            this.req = !this.req;
+            this.ngo = !this.ngo;
+            if(this.name === "Request's"){
+                this.name="NGO"
+            }
+            else{
+                this.name="Request's"
+            }
+        }
     }
 
 }
@@ -70,8 +89,6 @@ export default {
     margin-left: 2%;
     margin-right: 2%;
 }
-.block3{
-    
-}
+
 
 </style>

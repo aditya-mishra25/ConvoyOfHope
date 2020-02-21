@@ -22,7 +22,7 @@ export default {
 .main{
     text-align: left; 
     margin: 2%;
-    width: 30%;
+    width: 50%;
 }
 .block1{
     border-spacing: 1%
