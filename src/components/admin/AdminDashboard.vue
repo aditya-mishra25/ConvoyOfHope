@@ -1,40 +1,36 @@
-<!--<template>
+<template>
 <div>
 	<div>
-  <h5 class="my-3"> <code></code></h5>
-  
-</div>
-
+    <h5 class="my-3"> <code></code></h5>
+  </div>
 	<div>
-		<!-- <b-card
-    title="ConvoyOfHope"
-		style="max-width: 20rem; margin-top:10px; margin-left:10px">
-     <b-card-text>
-	What is Lorem Ipsum?
-	Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-    </b-card-text> 
-      <br>
-        <br>
-        <br>
-  </b-card> -->
-	<b-card
-		style="width:100%; margin-top:10px; margin-left:10px"
-		> 
-		<div >
+	<b-card style="width:100%; margin-top:10px; margin-left:10px"> 
+	<div>
    <table>
+     <tr>
+       <th>Name</th>
+       <th>Cause</th>
+       <th>Contact</th>
+       <th>Email</th>
+       <th>Location</th>
+
+    </tr>
      <tr v-for="item in items" v-bind:key="item.id">
        <td>{{item.name}}</td>
        <td>{{item.cause}}</td>
+       <td>{{item.contact}}</td>
+       <td>{{item.email}}</td>
        <td>{{item.location}}</td>
-       
-
+       <td><button id="del" ><b-icon-trash style="width: 40px; height: 40px;"></b-icon-trash>
+       </button></td>
      </tr>
-   </table>
-		</div>
+   </table> 
+   <!-- <b-table striped hover :items="items"></b-table> -->
+	</div>
 	</b-card>
 	</div>
 </div>
-</template>-->
+</template>
 
 
 <script>
@@ -46,8 +42,7 @@ import firebase from 'firebase'
         items: []
       }
     },
-   created(){
-
+      created(){
         firebase.firestore().collection('NgoRequests').get().then(
             querySnapshot => {
                 querySnapshot.forEach(doc =>{
@@ -61,16 +56,27 @@ import firebase from 'firebase'
                         'contact':doc.data().contact
                     }
                     this.items.push(data);
-                    
                 })
             }
-        )
-        console.log(items);
-        
-}
+        ).catch(error=>{
+            console.log(error);
+        });
+        console.log(items)
+    }
+    
   }
 </script>
 <style scoped>
+#del{
+  border:  1px solid black;
+ padding-top: 0;
+ max-width: 15px;
+ max-height:  15px;
+ background-color: lightBlue;
+ border-radius: 90px;
+ font-size: 14px;
+ text-align:  center;
+}
 table {  
     color: #333;
     font-family: Helvetica, Arial, sans-serif;
