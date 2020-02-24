@@ -1,8 +1,8 @@
-<template>
+<!--<template>
 <div>
 	<div>
   <h5 class="my-3"> <code></code></h5>
-  <!-- <b-img src= 'https://www.teckinfo.com/images/ngo_img.jpg' fluid-grow alt="Fluid-grow image"></b-img> -->
+  
 </div>
 
 	<div>
@@ -34,7 +34,8 @@
 	</b-card>
 	</div>
 </div>
-</template>
+</template>-->
+
 
 <script>
 import db from '../../main'
@@ -101,5 +102,6 @@ tr:nth-child(even) td { background: #F1F1F1; }
 tr:nth-child(odd) td { background: #FEFEFE; }  
 
 tr td:hover { background: #666; color: #FFF; }  
+
 </style>
 

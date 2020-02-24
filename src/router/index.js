@@ -3,8 +3,8 @@ import VueRouter from 'vue-router'
 import Register from '../components/auth/Register.vue'
 import Home from '../components/Home/Home.vue'
 import Login from '../components/auth/Login.vue'
-import AdminDashboard from '../components/admin/AdminDashboard.vue'
-import Footer from '../components/Footer.vue'
+// import AdminDashboard from '../components/admin/AdminDashboard.vue'
+// import Footer from '../components/Footer.vue'
 
 Vue.use(VueRouter)
 
@@ -26,18 +26,7 @@ const routes = [
     component: Login
 
   },
-  {
-    path: '/footer',
-    name: 'Footer',
-    component: Footer
-
-  },
-  {
-    path:'/admindashboard',
-    name: 'AdminDashboard',
-    component: AdminDashboard
-  },
-
+  
   {
     path: '/about',
     name: 'About',

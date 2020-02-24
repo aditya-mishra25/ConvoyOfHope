@@ -125,7 +125,6 @@ import db from '../../main';
                                         cause:this.cause,
                                         location:this.location,
                                         email:this.email,
-                                        password:this.confirmpassword,
                                         contact:this.contact,
                                         est:this.est,
                                         //id:need to sort out uploading id
