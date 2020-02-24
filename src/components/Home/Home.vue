@@ -73,7 +73,7 @@ export default {
 .block1{
     text-align: left;
     margin-top:5%;
-    margin-left: 5%;
+    margin-left: 5%; 
     margin-right:5%;
     color: aliceblue;
 }
