@@ -5,7 +5,7 @@
   <!-- <b-img src= 'https://www.teckinfo.com/images/ngo_img.jpg' fluid-grow alt="Fluid-grow image"></b-img> -->
 </div>
 
-	<div class="row">
+	<div>
 		<!-- <b-card
     title="ConvoyOfHope"
 		style="max-width: 20rem; margin-top:10px; margin-left:10px">
@@ -20,9 +20,17 @@
 	<b-card
 		style="width:100%; margin-top:10px; margin-left:10px"
 		> 
-		<div>
-    <b-table striped hover :items="items"></b-table>
-  	</div>
+		<div >
+   <table>
+     <tr v-for="item in items" v-bind:key="item.id">
+       <td>{{item.name}}</td>
+       <td>{{item.cause}}</td>
+       <td>{{item.location}}</td>
+       
+
+     </tr>
+   </table>
+		</div>
 	</b-card>
 	</div>
 </div>
@@ -34,11 +42,11 @@ import firebase from 'firebase'
   export default {
     data() {
       return {
-        items: [
-        ]
+        items: []
       }
     },
    created(){
+
         firebase.firestore().collection('NgoRequests').get().then(
             querySnapshot => {
                 querySnapshot.forEach(doc =>{
@@ -52,12 +60,46 @@ import firebase from 'firebase'
                         'contact':doc.data().contact
                     }
                     this.items.push(data);
-                    console.log(items);
+                    
                 })
             }
         )
+        console.log(items);
         
 }
   }
 </script>
+<style scoped>
+table {  
+    color: #333;
+    font-family: Helvetica, Arial, sans-serif;
+    width: 640px; 
+    border-collapse: 
+    collapse; border-spacing: 0; 
+}
+
+td, th {  
+    border: 1px solid transparent; /* No more visible border */
+    height: 30px; 
+    transition: all 0.3s;  /* Simple transition for hover effect */
+}
+
+th {  
+    background: #DFDFDF;  /* Darken header a bit */
+    font-weight: bold;
+}
+
+td {  
+    background: #FAFAFA;
+    text-align: center;
+}
+
+/* Cells in even rows (2,4,6...) are one color */        
+tr:nth-child(even) td { background: #F1F1F1; }   
+
+/* Cells in odd rows (1,3,5...) are another (excludes header cells)  */        
+tr:nth-child(odd) td { background: #FEFEFE; }  
+
+tr td:hover { background: #666; color: #FFF; }  
+</style>
 
