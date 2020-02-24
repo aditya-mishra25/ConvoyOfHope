@@ -154,7 +154,7 @@ export default {
         .then(
           user => {
             alert(`You are logged in as ${user.email}`);
-            this.$router.push('/dashboard');
+            this.$router.push('/');
           },
           err => {
             alert(err.message);
