@@ -8,7 +8,8 @@
     <p>Hope for social cause!:D</p>
   </div>
   <!-- Copyright -->
-
+<!-- Copyright -->
+<p></p>
 </footer>
 <!-- Footer -->
 </template>
