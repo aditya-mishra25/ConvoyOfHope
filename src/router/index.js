@@ -4,7 +4,8 @@ import Register from '../components/auth/Register.vue'
 import Home from '../components/Home/Home.vue'
 import Login from '../components/auth/Login.vue'
 import AdminDashboard from '../components/admin/AdminDashboard.vue'
-
+import AdminRequest from '../components/admin/NgoRequests.vue'
+import Demo from '../components/Demo.vue'
 
 Vue.use(VueRouter)
 
@@ -13,6 +14,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/demo',
+    name: 'Demo',
+    component: Demo
   },
   {
     path: '/register',
@@ -30,6 +36,11 @@ const routes = [
     path: '/admindashboard',
     name: 'Admin',
     component: AdminDashboard
+  },
+  {
+    path: '/ngorequest',
+    name: 'AdminRequest',
+    component: AdminRequest
   },
   
   {

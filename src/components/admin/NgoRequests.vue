@@ -1,5 +1,5 @@
 <template>
-<div>
+  <div>
 <br>
 <table class="table table-striped" style="width:100%">
   <thead class="thead-dark">
@@ -11,6 +11,8 @@
       <th scope="col"></th>
       <th scope="col"></th>
       <th scope="col"></th>
+      <th scope="col"></th>
+
 
     </tr>
   </thead>
@@ -22,13 +24,13 @@
       <td>{{item.date}}</td>
       <td>{{item.email}}</td>
       <td>{{item.contact}}</td>
-      <td><button v-on:click="DeleteNgo(item.id)" class="fa fa-trash-o fa-3x btn" style="color:red" v-bind:value="item.name"></button></td>
+      <td><button v-on:click="DeleteNgoRequest(item.id)" class="fa fa-trash-o fa-3x btn" style="color:red"></button></td>
+      <td><button v-on:click="AcceptNgoRequest(item.id,item.name,item.cause,item.location,item.date,item.email,item.contact)" class="fa fa-check fa-3x btn" style="color:green"></button></td>
     </tr>
   </tbody>
 </table>
 </div>
 </template>
-
 
 <script>
 import db from '../../main'
@@ -40,7 +42,7 @@ import firebase from 'firebase'
       }
     },
       created(){
-        firebase.firestore().collection('NGO').get().then(
+        firebase.firestore().collection('NgoRequests').get().then(
             querySnapshot => {
                 querySnapshot.forEach(doc =>{
                     const data ={
@@ -60,38 +62,42 @@ import firebase from 'firebase'
         });
     },
     methods:{
-      DeleteNgo(id){
-        
+      DeleteNgoRequest(id,email){
         var x = confirm("Do you really want to Delete NGO");
         if(x == true){
-          console.log(id);
-          firebase.firestore().collection('NGO').doc(id).delete().then(function() {
+          firebase.firestore().collection('NgoRequests').doc(id).delete().then(function() {
               alert("NGO successfully deleted!");
               location.reload();
           }).catch(function(error) {
               alert("Error removing document: ", error);
           });
         }
+      },
+      AcceptNgoRequest(id,name,cause,location,date,email,contact){
+          var x = confirm("Sure you want to Accept this NGO?")
+          if(x == true){
+              firebase.firestore().collection('NGO').doc(name).set({
+                name:name,
+                cause:cause,
+                location:location,
+                email:email,
+                contact:contact,
+                est:date,
+                //id:need to sort out uploading id
+                }).then(function(docRef){
+                    firebase.firestore().collection('NgoRequests').doc(id).delete().then(function(){
+                        alert('This NGO is a part of our Organization now')
+                    })
+                }).catch(function(error){
+                console.log(error);
+                })
+          }
       }
     }
-    
-  }
+}
+
 </script>
+
 <style scoped>
- 
-.btn:active {/*onClick*/
-    background-image: -webkit-linear-gradient(#efefef 0%, #d6d6d6 100%);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 2px 2px rgba(0, 0, 0, 0.19);
-    border-bottom: none;
-}
-.btn:hover{
-  background-color: grey;
-}
-.btn:focus{
-    background-color: white;
-
-}
-
 
 </style>
-
