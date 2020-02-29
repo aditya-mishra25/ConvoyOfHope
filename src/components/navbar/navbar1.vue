@@ -10,7 +10,7 @@
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <b-nav-item to="/admindashboard">NGO's</b-nav-item>
-        <b-nav-item href="#">NGO Requests</b-nav-item>
+        <b-nav-item to="/ngorequest">NGO Requests</b-nav-item>
 
         <!-- <b-nav-item-dropdown text="NGO's" right>
           <b-dropdown-item href="#" v-for="NGOs in NGO" v-bind:key="NGOs.id" >{{NGOs.id}}</b-dropdown-item>

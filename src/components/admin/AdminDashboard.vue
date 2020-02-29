@@ -11,6 +11,7 @@
       <th scope="col"></th>
       <th scope="col"></th>
       <th scope="col"></th>
+      <th scope="col"></th>
 
     </tr>
   </thead>
@@ -22,6 +23,7 @@
       <td>{{item.date}}</td>
       <td>{{item.email}}</td>
       <td>{{item.contact}}</td>
+      <td><a class="fa fa-download fa-3x btn" :href="item.url"></a></td>
       <td><button v-on:click="DeleteNgo(item.id)" class="fa fa-trash-o fa-3x btn" style="color:red" v-bind:value="item.name"></button></td>
     </tr>
   </tbody>
@@ -33,6 +35,7 @@
 <script>
 import db from '../../main'
 import firebase from 'firebase'
+import axios from 'axios'
   export default {
     data() {
       return {
@@ -50,7 +53,8 @@ import firebase from 'firebase'
                         'date':doc.data().est,
                         'email':doc.data().email,
                         'location':doc.data().location,
-                        'contact':doc.data().contact
+                        'contact':doc.data().contact,
+                        'url':doc.data().url
                     }
                     this.items.push(data);
                 })
@@ -72,7 +76,7 @@ import firebase from 'firebase'
               alert("Error removing document: ", error);
           });
         }
-      }
+      },
     }
     
   }

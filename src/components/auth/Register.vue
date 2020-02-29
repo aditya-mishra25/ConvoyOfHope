@@ -68,7 +68,6 @@
 
             <b-form-file
               v-model="file"
-              :state="Boolean(file)"
               placeholder="Choose a file or drop it here..."
               drop-placeholder="Drop file here..."
             ></b-form-file><br><br>
@@ -96,13 +95,14 @@ import db from '../../main';
         contact:null,
         est:null,
         file:null,
-        logid:""
+        durl:null
       }
     },
     methods:{
       register:function(e){
         var logid="";
-        var rege= /^[a-zA-Z]+$/;
+        var a = "";
+        var rege= /^[a-zA-Z ]*$/;
             if(this.name !="" && rege.test(this.name)){
                 if(this.cause !="" && rege.test(this.cause)){
                   if(this.location !="" && rege.test(this.location)){
@@ -111,28 +111,48 @@ import db from '../../main';
                         
                               var selectedDate = new Date(this.est);
                               var now = new Date();
+
+                              const getDurl = (d) => {
+                                
+                              }
                               if (selectedDate < now) {
                                 firebase.auth().createUserWithEmailAndPassword(this.email,this.confirmpassword)
                                 .then(
                                   user=>{
-                                    firebase.auth().onAuthStateChanged(function(user){
-                                        logid = user.uid;
-                                    });
-                                    console.log(logid);
-                                    const newid = this.name;
+                                    
+                                    let newid = this.name;
                                     db.collection("NgoRequests").doc(`${newid}`).set({
                                         name:this.name,
                                         cause:this.cause,
                                         location:this.location,
                                         email:this.email,
                                         contact:this.contact,
-                                        est:this.est,
+                                        est:this.est
                                         //id:need to sort out uploading id
                                       }).then(function(docRef){
                                         console.log(docRef.id);
                                       }).catch(function(error){
                                         console.log(error);
                                       })
+
+                                    var doc = this.file;
+                                    var docname = this.file.name;
+                                    var storageRef = firebase.storage().ref('NGO/'+docname);
+                                    var uploadTask = storageRef.put(doc);
+                                    uploadTask.on('state_changed', function(snapshot){
+                                        var progress = (snapshot.bytesTransfered/snapshot.totalBytes)*100;
+                                        console.log("upload is" + progress + "done");
+                                    },function(error){
+                                        console.log(error);
+                                    },
+                                    function(){
+                                        uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL){
+                                          console.log(downloadURL);
+                                          db.collection("NgoRequests").doc(`${newid}`).update({
+                                            url:downloadURL
+                                          });
+                                        });
+                                    });
 
                                       alert(`Account created for ${user.email}`);
                                       this.$router.push("/login");
@@ -165,6 +185,9 @@ import db from '../../main';
               alert("Name not valid") 
             } 
               
+      },
+      upload:function(e){
+        
       }
     }
   }

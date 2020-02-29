@@ -2,10 +2,8 @@
   <div>
        <b-form-file
               v-model="file"
-              :state="Boolean(file)"
               placeholder="Choose a file or drop it here..."
               drop-placeholder="Drop file here..."
-              @change="onFilePicked"
             ></b-form-file><br><br>
         <b-button @click="upload">Submit</b-button>
 
@@ -14,6 +12,7 @@
 
 <script>
 import {db} from '../main';
+import firebase from 'firebase';
 export default {
     name:"Demo",
     data(){
@@ -24,16 +23,22 @@ export default {
     },
     methods:{
         upload(){
-            this.doc=null;
-             const storageRef=firebase.storage().ref(`${this.doc.name}`).put(this.imageData);
-                storageRef.on(`state_changed`,snapshot=>{
-                    this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
-                }, error=>{console.log(error.message)},
-                ()=>{
-                    storageRef.snapshot.ref.getDownloadURL().then((url)=>{
-                    this.picture =url;
-                    });
+            console.log(this.file)
+            var doc = this.file;
+            var docname = this.file.name;
+            var storageRef = firebase.storage().ref('NGO/'+docname);
+            var uploadTask = storageRef.put(doc);
+            uploadTask.on('state_changed', function(snapshot){
+                var_progress = (snapshot.bytesTransfered/snapshot.totalBytes)*100;
+                console.log("upload is" + progress + "done");
+            },function(error){
+                console.log(error)
+            },
+            function(){
+                uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL){
+                    console.log(downloadURL);
                 });
+            });
         },
     }
 }

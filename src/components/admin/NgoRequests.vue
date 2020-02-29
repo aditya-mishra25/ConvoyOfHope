@@ -12,6 +12,8 @@
       <th scope="col"></th>
       <th scope="col"></th>
       <th scope="col"></th>
+      <th scope="col"></th>
+
 
 
     </tr>
@@ -24,8 +26,9 @@
       <td>{{item.date}}</td>
       <td>{{item.email}}</td>
       <td>{{item.contact}}</td>
+      <td><a class="fa fa-download fa-3x btn" :href="item.url"></a></td>
       <td><button v-on:click="DeleteNgoRequest(item.id)" class="fa fa-trash-o fa-3x btn" style="color:red"></button></td>
-      <td><button v-on:click="AcceptNgoRequest(item.id,item.name,item.cause,item.location,item.date,item.email,item.contact)" class="fa fa-check fa-3x btn" style="color:green"></button></td>
+      <td><button v-on:click="AcceptNgoRequest(item.id,item.name,item.cause,item.location,item.date,item.email,item.contact,item.url)" class="fa fa-check fa-3x btn" style="color:green"></button></td>
     </tr>
   </tbody>
 </table>
@@ -52,7 +55,8 @@ import firebase from 'firebase'
                         'date':doc.data().est,
                         'email':doc.data().email,
                         'location':doc.data().location,
-                        'contact':doc.data().contact
+                        'contact':doc.data().contact,
+                        'url':doc.data().url
                     }
                     this.items.push(data);
                 })
@@ -73,7 +77,7 @@ import firebase from 'firebase'
           });
         }
       },
-      AcceptNgoRequest(id,name,cause,location,date,email,contact){
+      AcceptNgoRequest(id,name,cause,location,date,email,contact,url){
           var x = confirm("Sure you want to Accept this NGO?")
           if(x == true){
               firebase.firestore().collection('NGO').doc(name).set({
@@ -83,6 +87,7 @@ import firebase from 'firebase'
                 email:email,
                 contact:contact,
                 est:date,
+                url:url
                 //id:need to sort out uploading id
                 }).then(function(docRef){
                     firebase.firestore().collection('NgoRequests').doc(id).delete().then(function(){

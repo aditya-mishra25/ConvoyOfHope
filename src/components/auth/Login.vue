@@ -134,6 +134,8 @@ margin-left: 4px;
 #login_btn{
   margin-left: 120px;
 }
+
+
 </style>
 
 <script>
@@ -154,7 +156,14 @@ export default {
         .then(
           user => {
             alert(`You are logged in as ${user.email}`);
+            
+
+            if(this.email=="admin@me.com"){
+              this.$router.push('/admindashboard');
+            }
+            else{
             this.$router.push('/');
+            }
           },
           err => {
             alert(err.message);
