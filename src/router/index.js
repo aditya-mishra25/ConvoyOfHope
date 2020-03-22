@@ -6,7 +6,7 @@ import Login from '../components/auth/Login.vue'
 import AdminDashboard from '../components/admin/AdminDashboard.vue'
 import AdminRequest from '../components/admin/NgoRequests.vue'
 import Demo from '../components/Demo.vue'
-import NGOProfile from '../components/Home/NgoProfile.vue'
+import NgoProfile from '../components/Home/NgoProfile.vue'
 
 Vue.use(VueRouter)
 
@@ -17,9 +17,9 @@ const routes = [
     component: Home
   },
   {
-    path: '/profile',
+    path: '/ngoprofile/:id',
     name: 'NgoProfile',
-    component: NGOProfile
+    component: NgoProfile
   },
   {
     path: '/demo',

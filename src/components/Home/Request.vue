@@ -18,12 +18,5 @@ export default {
 </script>
 
 <style scoped>
-.main{
-    text-align: left; 
-    margin: 2%; 
-    width: 60%;
-}
-.block1{
-    border-spacing: 1%
-}
+
 </style>

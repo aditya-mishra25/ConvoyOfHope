@@ -18,15 +18,64 @@
             </b-navbar>
        </div>
        <div class='block3'>
-           <div v-if="req">
-               <app-request></app-request>
+           <div class="b31">
+                <div v-if="req">
+                    <app-request></app-request>
+                </div>
+                <div v-if="ngo">
+                    <app-ngolist></app-ngolist>
+                </div>
            </div>
-           <div v-if="ngo">
-               <app-ngolist></app-ngolist>
+           <div class="b32" >
+               <h1>Our Top Donators</h1>
+               
+                   
            </div>
        </div>
   </div>
 </template>
+<style scoped>
+.blockmain{
+    display: flex;
+    flex-direction: column;
+}
+.block1{
+    text-align: left;
+    margin-top:5%;
+    margin-left: 5%; 
+    margin-right:5%;
+    color: aliceblue;
+}
+.block{
+    margin-left: 2%;
+    margin-right: 2%;
+    height: 500px;
+    flex:1;
+    opacity: 90%;
+}
+.block2{
+    font-size: 2em;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+.block3{
+    display: flex;
+    margin-left: 10%;
+    margin-right: 10%
+
+}
+.b31{
+    flex:1;
+    width: 100%
+}
+.b32{
+    flex:1;
+    text-align: left;
+    width:100%;
+}
+
+
+</style>
 
 <script>
 import ngokids from '../../assets/ngo.jpg'
@@ -65,30 +114,3 @@ export default {
 }
 </script>
 
-<style scoped>
-.blockmain{
-    display: flex;
-    flex-direction: column;
-}
-.block1{
-    text-align: left;
-    margin-top:5%;
-    margin-left: 5%; 
-    margin-right:5%;
-    color: aliceblue;
-}
-.block{
-    margin-left: 2%;
-    margin-right: 2%;
-    height: 500px;
-    flex:1;
-    opacity: 90%;
-}
-.block2{
-    font-size: 2em;
-    margin-left: 2%;
-    margin-right: 2%;
-}
-
-
-</style>

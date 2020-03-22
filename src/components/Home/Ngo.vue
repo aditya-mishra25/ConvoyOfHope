@@ -1,12 +1,13 @@
 <template>
   <div class='main'>
-      <div class="block1">
-          <b-card v-for="ngo in NGOs" v-bind:key="ngo.id" style="margin:1%">
+      <div class="block1" style="width:550px; margin:2%">
+          <b-card v-for="ngo in NGOs" v-bind:key="ngo.id">
               <h1>{{ngo.name}}</h1>
               <hr>
-              <h4>Details:</h4><h5>{{ngo.cause}}</h5>
-              <p>A brief about the ngo.</p>
-              <b-button variant="info">Visit</b-button>
+              <h4>Casue: {{ngo.cause}}</h4>
+              <h4>Location: {{ngo.location}}</h4>
+              <p>A Brief about the ngo.</p>
+              <router-link v-bind:to="{name:'NgoProfile', params:{id:ngo.id}}">Visit</router-link>
           </b-card>
       </div>
   </div>
@@ -22,7 +23,7 @@ export default {
         }
     },
     created(){
-        firebase.firestore().collection('NgoRequests').get().then(
+        firebase.firestore().collection('NGO').get().then(
             querySnapshot => {
                 querySnapshot.forEach(doc =>{
                     const data ={
@@ -42,10 +43,7 @@ export default {
 }
 }
 </script>
-
-<<<<<<< HEAD
 <style  scoped>
 
+
 </style>
-=======
->>>>>>> fa73edb88be10ab6b85f741620a3c65786b404e6
