@@ -1,11 +1,11 @@
 <template>
-<div id="login">
+<div id="login" :style="cssProps">
     <div class="grey lighten-3">
     <div class="container">
       <div class="d-flex justify-content-center h-100">
         <div class="card">
           <div class="card-header">
-            <h3>Login In</h3>
+            <h3>Login</h3>
           </div>
           <div class="card-body">
             <form>
@@ -24,7 +24,7 @@
               </div>
              
 
-              <b-button style="background-color: #FFC312;" v-on:click="login">Login</b-button>
+              <b-button id = 'loginbtn' style="background-color: #FFC312; color:black" v-on:click="login">Login</b-button>
             </form>
           </div>
           <div class="card-footer">
@@ -132,7 +132,16 @@ margin-left: 4px;
 }
 
 #login_btn{
-  margin-left: 120px;
+  margin-left: 200px;
+  
+}
+
+#login{
+  margin: none;
+  height: 600px;
+  background-repeat: no-repeat;
+  background-size:1400px 800px ;
+
 }
 
 
@@ -144,6 +153,10 @@ export default {
   name: 'login',
   data: function() {
     return {
+      cssProps:{
+        backgroundImage: `url(${require('@/assets/ngoo.jpg')})`
+
+      },
       email: '',
       password: ''
     };

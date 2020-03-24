@@ -7,6 +7,7 @@ import AdminDashboard from '../components/admin/AdminDashboard.vue'
 import AdminRequest from '../components/admin/NgoRequests.vue'
 import Demo from '../components/Demo.vue'
 import NgoProfile from '../components/Home/NgoProfile.vue'
+import DemoRegister from '../components/auth/DemoRegister'
 
 Vue.use(VueRouter)
 
@@ -56,6 +57,11 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  },
+  {
+    path: '/demoregister',
+    name: 'DemoRegister',
+    component: DemoRegister
   }
 ]
 
