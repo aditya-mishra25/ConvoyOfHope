@@ -8,6 +8,7 @@ import AdminRequest from '../components/admin/NgoRequests.vue'
 import Demo from '../components/Demo.vue'
 import NgoProfile from '../components/Home/NgoProfile.vue'
 import DemoRegister from '../components/auth/DemoRegister'
+import RequestCard from '../components/Home/RequestCard'
 
 Vue.use(VueRouter)
 
@@ -62,6 +63,11 @@ const routes = [
     path: '/demoregister',
     name: 'DemoRegister',
     component: DemoRegister
+  },
+  {
+    path: '/requestcard',
+    name: 'RequestCard',
+    component: RequestCard
   }
 ]
 
