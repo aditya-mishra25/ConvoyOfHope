@@ -168,14 +168,14 @@ export default {
         .signInWithEmailAndPassword(this.email, this.password)
         .then(
           user => {
-            alert(`You are logged in as ${user.email}`);
+            alert(`You are logged in as ${this.email}`);
             
 
             if(this.email=="admin@me.com"){
               this.$router.push('/admindashboard');
             }
             else{
-            this.$router.push('/');
+            this.$router.push('/ngoprofile/'+this.email);
             }
           },
           err => {

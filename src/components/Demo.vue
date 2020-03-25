@@ -1,49 +1,42 @@
 <template>
-  <div>
-       <b-form-file
-              v-model="file"
-              placeholder="Choose a file or drop it here..."
-              drop-placeholder="Drop file here..."
-            ></b-form-file><br><br>
-        <b-button @click="upload">Submit</b-button>
-
-  </div>
+  <h5>{{NGOs.name}}</h5>
 </template>
 
 <script>
-import {db} from '../main';
 import firebase from 'firebase';
+import db from '../main'
 export default {
-    name:"Demo",
     data(){
         return{
-            file:"",
-            doc:null
+            NGOs:[]
         }
     },
-    methods:{
-        upload(){
-            console.log(this.file)
-            var doc = this.file;
-            var docname = this.file.name;
-            var storageRef = firebase.storage().ref('NGO/'+docname);
-            var uploadTask = storageRef.put(doc);
-            uploadTask.on('state_changed', function(snapshot){
-                var_progress = (snapshot.bytesTransfered/snapshot.totalBytes)*100;
-                console.log("upload is" + progress + "done");
-            },function(error){
-                console.log(error)
-            },
-            function(){
-                uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL){
-                    console.log(downloadURL);
-                });
-            });
-        },
-    }
+    created(){
+        var a = this.$route.params.id;
+        firebase.firestore().collection('NGO').where('email','==',a).get().then(
+            querySnapshot => {
+                querySnapshot.forEach(doc =>{
+                    const data ={
+                        'id':doc.id,
+                        'name':doc.data().name,
+                        'cause':doc.data().cause,
+                        'date':doc.data().est,
+                        'email':doc.data().email,
+                        'location':doc.data().location,
+                        'contact':doc.data().contact
+                    }
+                    this.NGOs=data;
+                    
+                })
+            }
+        )
+        console.log(this.NGOs)
+        
+}
 }
 </script>
+<style  scoped>
 
-<style>
 
 </style>
+

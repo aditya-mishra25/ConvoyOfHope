@@ -28,7 +28,7 @@
       <td>{{item.contact}}</td>
       <td><a class="fa fa-download fa-3x btn" :href="item.url"></a></td>
       <td><button v-on:click="DeleteNgoRequest(item.id)" class="fa fa-trash-o fa-3x btn" style="color:red"></button></td>
-      <td><button v-on:click="AcceptNgoRequest(item.id,item.name,item.cause,item.location,item.date,item.email,item.contact,item.url)" class="fa fa-check fa-3x btn" style="color:green"></button></td>
+      <td><button v-on:click="AcceptNgoRequest(item.id,item.name,item.cause,item.location,item.date,item.email,item.contact,item.url,item.imageurl)" class="fa fa-check fa-3x btn" style="color:green"></button></td>
     </tr>
   </tbody>
 </table>
@@ -56,7 +56,8 @@ import firebase from 'firebase'
                         'email':doc.data().email,
                         'location':doc.data().location,
                         'contact':doc.data().contact,
-                        'url':doc.data().url
+                        'url':doc.data().url,
+                        'imageurl':doc.data().imgurl
                     }
                     this.items.push(data);
                 })
@@ -77,7 +78,7 @@ import firebase from 'firebase'
           });
         }
       },
-      AcceptNgoRequest(id,name,cause,location,date,email,contact,url){
+      AcceptNgoRequest(id,name,cause,location,date,email,contact,url,imageurl){
           var x = confirm("Sure you want to Accept this NGO?")
           if(x == true){
               firebase.firestore().collection('NGO').doc(name).set({
@@ -87,8 +88,8 @@ import firebase from 'firebase'
                 email:email,
                 contact:contact,
                 est:date,
-                url:url
-                //id:need to sort out uploading id
+                url:url,
+                imageurl:imageurl
                 }).then(function(docRef){
                     firebase.firestore().collection('NgoRequests').doc(id).delete().then(function(){
                         alert('This NGO is a part of our Organization now')

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="container register">
+        <div class=" register">
                 <div class="row">
                     <div class="col-md-3 register-left">
                         <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
@@ -9,63 +9,52 @@
                         <input type="submit" name="" value="Login"/><br/>
                     </div>
                     <div class="col-md-9 register-right">
-                        <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Employee</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Hirer</a>
-                            </li>
-                        </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <h3 class="register-heading">Apply as a Employee</h3>
                                 <div class="row register-form">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="First Name *" value="" />
+                                            <input type="text" class="form-control" placeholder="NGO's Name *" v-model="name" value="" />
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Last Name *" value="" />
+                                            <input type="text" class="form-control" placeholder="Cause *" v-model="cause" value="" />
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control" placeholder="Password *" value="" />
+                                            <input type="password" minlength="6" class="form-control" placeholder="Password *" v-model="password" value="" />
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control"  placeholder="Confirm Password *" value="" />
+                                            <input type="password" minlength="6" class="form-control"  placeholder="Confirm Password *" v-model="confirmpassword" value="" />
                                         </div>
                                         <div class="form-group">
-                                            <div class="maxl">
-                                                <label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="male" checked>
-                                                    <span> Male </span> 
-                                                </label>
-                                                <label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="female">
-                                                    <span>Female </span> 
-                                                </label>
-                                            </div>
+                                            <b-form-file
+                                                v-model="image"
+                                                placeholder="NGO's Profile Image here *"
+                                                drop-placeholder="Drop file here..."
+                                                ></b-form-file>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="email" class="form-control" placeholder="Your Email *" value="" />
+                                            <input type="email" class="form-control" placeholder="Your Email *" v-model="email" value="" />
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" minlength="10" maxlength="10" name="txtEmpPhone" class="form-control" placeholder="Your Phone *" value="" />
+                                            <input type="text" minlength="10" maxlength="10" name="txtEmpPhone" class="form-control" placeholder="Your Phone *"  v-model="contact" value="" />
                                         </div>
                                         <div class="form-group">
-                                            <select class="form-control">
-                                                <option class="hidden"  selected disabled>Please select your Sequrity Question</option>
-                                                <option>What is your Birthdate?</option>
-                                                <option>What is Your old Phone Number</option>
-                                                <option>What is your Pet Name?</option>
-                                            </select>
+                                            <input type="text" class="form-control" placeholder="When was your NGO Established? *" v-model="est" value="" onfocus="(this.type='date')" />
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Enter Your Answer *" value="" />
+                                            <input type="text" class="form-control" placeholder="NGO's Location? *" v-model="location" value="" />
                                         </div>
-                                        <input type="submit" class="btnRegister"  value="Register"/>
+                                        <div class="form-group">
+                                            <b-form-file
+                                                v-model="file"
+                                                placeholder="NGO documents here *"
+                                                drop-placeholder="Drop file here..."
+                                                ></b-form-file>
+                                        </div>
+                                        <button class="btnRegister"  value="Register" v-on:click="register">Register</button>
                                     </div>
                                 </div>
                             </div>
@@ -96,17 +85,9 @@
                                             <input type="password" class="form-control" placeholder="Confirm Password *" value="" />
                                         </div>
                                         <div class="form-group">
-                                            <select class="form-control">
-                                                <option class="hidden"  selected disabled>Please select your Sequrity Question</option>
-                                                <option>What is your Birthdate?</option>
-                                                <option>What is Your old Phone Number</option>
-                                                <option>What is your Pet Name?</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
                                             <input type="text" class="form-control" placeholder="`Answer *" value="" />
                                         </div>
-                                        <input type="submit" class="btnRegister"  value="Register"/>
+                                        <input type="submit" class="btnRegister"  value="Register"  v-on:click="register"/>
                                     </div>
                                 </div>
                             </div>
@@ -117,12 +98,156 @@
             </div>
     </div>
 </template>
+<script>
+import firebase from 'firebase';
+import db from '../../main';
+  export default {
+    data() {
+      return {
+        name:null,
+        cause:null,
+        location:null,
+        email:null,
+        password:null,
+        confirmpassword:null,
+        contact:null,
+        est:null,
+        file:null,
+        durl:null,
+        image:null
+      }
+    },
+    methods:{
+      register:function(e){
+          console.log("reg click")
+        var logid="";
+        var a = "";
+        var rege= /^[a-zA-Z ]*$/;
+            if(this.name !="" && rege.test(this.name)){
+                if(this.cause !="" && rege.test(this.cause)){
+                  if(this.location !="" && rege.test(this.location)){
+                    if(this.password !="" && this.confirmpassword !="" && this.password.length >= 6 && this.confirmpassword.length >= 6 && this.password === this.confirmpassword){
+                      if(this.contact !="" && this.contact.length == 10 ){
+                        
+                              var selectedDate = new Date(this.est);
+                              var now = new Date();
+                              var type = this.image.type
+                              var t = type.includes('image')
+                              if (selectedDate < now) {
+                                  if(this.file != ""){
+                                      if(this.image!=""){
+                                          if(type=='image/jpeg' || type=='image/jpg' || type=='image/png' || type=='image/gif'){
+                                            firebase.auth().createUserWithEmailAndPassword(this.email,this.confirmpassword)
+                                            .then(
+                                            user=>{
+                                                
+                                                let newid = this.name;
+                                                db.collection("NgoRequests").doc(`${newid}`).set({
+                                                    name:this.name,
+                                                    cause:this.cause,
+                                                    location:this.location,
+                                                    email:this.email,
+                                                    contact:this.contact,
+                                                    est:this.est
+                                                    //id:need to sort out uploading id
+                                                }).then(function(docRef){
+                                                    console.log(docRef.id);
+                                                }).catch(function(error){
+                                                    console.log(error);
+                                                })
 
+                                                var doc = this.file;
+                                                var docname = this.file.name;
+                                                var storageRef = firebase.storage().ref('NGO/'+docname);
+                                                var uploadTask = storageRef.put(doc);
+                                                uploadTask.on('state_changed', function(snapshot){
+                                                    var progress = (snapshot.bytesTransfered/snapshot.totalBytes)*100;
+                                                    console.log("upload is" + progress + "done");
+                                                },function(error){
+                                                    console.log(error);
+                                                },
+                                                function(){
+                                                    uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL){
+                                                    console.log(downloadURL);
+                                                    db.collection("NgoRequests").doc(`${newid}`).update({
+                                                        url:downloadURL
+                                                    });
+                                                    });
+                                                });
+
+                                                var img=this.image;
+                                                var imgname=this.image.name;
+                                                var storageReff=firebase.storage().ref('NGOProfileImg/'+imgname);
+                                                var uploadTaskk=storageReff.put(img);
+                                                uploadTaskk.on('state_changed',function(snapshot){
+                                                    var progress = (snapshot.bytesTransfered/snapshot.totalBytes)*100;
+                                                    console.log("upload is" + progress + "done");
+                                                },function(error){
+                                                    console.log(error);
+                                                },
+                                                function(){
+                                                    uploadTaskk.snapshot.ref.getDownloadURL().then(function(downloadURL1){
+                                                        console.log(downloadURL1);
+                                                        db.collection("NgoRequests").doc(`${newid}`).update({
+                                                            imgurl:downloadURL1
+                                                        });
+                                                    });
+                                                });
+                                                alert(`Account created for ${user.email}`);
+                                                this.$router.push("/login");
+                                                },
+                                            err=>{
+                                                alert(err.message);
+                                            });
+                                          }
+                                          else{
+                                              alert('Please upload file having extensions .jpeg/.jpg/.png/.gif only.')
+                                          }
+                                    }
+                                    else{
+                                        alert('Image cannot be empty')
+                                    }
+                                }
+                                else{
+                                    alert('You need to upload a document for verification purpose.')
+                                }
+                              }
+                              else{
+                                  alert('invalid date')
+                              }
+                      }
+                      else{
+                          alert("incorrect contact number")
+                      }
+                    }
+                    else{
+                        alert("password and confirm password incorrect")
+                      }
+                 }
+                 else{
+                        alert("Location should not be empty and should not contain numbers")
+                      }
+                }
+                else{
+                        alert("Cause should not be empty and should not contain numbers")
+                      }
+          }
+          else{
+              alert("Name not valid") 
+            } 
+              
+      },
+      upload:function(e){
+        
+      }
+    }
+  }
+</script>
 <style scoped>
     .register{
-    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+    background: -webkit-linear-gradient(left, darkgoldenrod,rgb(250, 211, 113));
     /* margin-top: 3%; */
-    /* padding: 3%; */
+    padding: 3%;
 }
 .register-left{
     text-align: center;
@@ -176,7 +301,7 @@
     border: none;
     border-radius: 1.5rem;
     padding: 2%;
-    background: #0062cc;
+    background: darkgoldenrod;
     color: #fff;
     font-weight: 600;
     width: 50%;

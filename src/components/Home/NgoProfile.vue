@@ -14,10 +14,10 @@
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
-                                        Kshiti Ghelani
+                                        {{NGOs.name}}
                                     </h5>
                                     <h6>
-                                        Web Developer and Designer
+                                        {{NGOs.cause}}
                                     </h6>
                                     <p class="proile-rating">RANKINGS : <span>8/10</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -54,18 +54,10 @@
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         <div class="row">
                                             <div class="col-md-2">
-                                                <label>User Id</label>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <p>Kshiti123</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-2">
                                                 <label>Name</label>
                                             </div>
                                             <div class="col-md-2">
-                                                <p>Kshiti Ghelani</p>
+                                                <p>{{NGOs.name}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -73,7 +65,7 @@
                                                 <label>Email</label>
                                             </div>
                                             <div class="col-md-2">
-                                                <p>kshitighelani@gmail.com</p>
+                                                <p>{{NGOs.email}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -81,12 +73,12 @@
                                                 <label>Phone</label>
                                             </div>
                                             <div class="col-md-2">
-                                                <p>123 456 7890</p>
+                                                <p>{{NGOs.contact}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-2">
-                                                <label>Profession</label>
+                                                <label></label>
                                             </div>
                                             <div class="col-md-2">
                                                 <p>Web Developer and Designer</p>
@@ -153,29 +145,33 @@
 import firebase from 'firebase';
 import db from '../../main'
 export default {
-  name:'NgoProfile',
-  data(){
-    return{
-      ngo:[]
-    }
-  },
-  created(){
-    var id=this.$route.params.id;
-    var docRef=firebase.firestore().collection("NGO").doc(id);
-    docRef.get().then(function(doc){
-      if(doc.exists){
-        console.log(doc.data());
-        ngo.concat(doc.data())
-      }
-      else{
-        console.log("No such data exists")
-      }
-    })
-    console.log(this.ngo.values)
-  }
-
-  
+    data(){
+        return{
+            NGOs:""
+        }
+    },
+    created(){
+        var id= this.$route.params.id;
+        firebase.firestore().collection('NGO').where('email','==',id).get().then(
+            querySnapshot => {
+                querySnapshot.forEach(doc =>{
+                    const data ={
+                        'id':doc.id,
+                        'name':doc.data().name,
+                        'cause':doc.data().cause,
+                        'date':doc.data().est,
+                        'email':doc.data().email,
+                        'location':doc.data().location,
+                        'contact':doc.data().contact
+                    }
+                    this.NGOs=data;
+                    
+                })
+            }
+        )
 }
+}
+</script>
 </script>
 
 

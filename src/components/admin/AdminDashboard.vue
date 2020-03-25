@@ -17,7 +17,7 @@
   </thead>
   <tbody>
     <tr scope="row" v-for="item in items" v-bind:key="item.id">
-      <td><b class="chip"><router-link :to="{name:'NgoProfile', params:{id:item.id}}">{{item.name}}</router-link></b></td>
+      <td><b class="chip"><router-link :to="{name:'NgoProfile', params:{id:item.email}}">{{item.name}}</router-link></b></td>
       <td>{{item.cause}}</td>
       <td>{{item.location}}</td>
       <td>{{item.date}}</td>
