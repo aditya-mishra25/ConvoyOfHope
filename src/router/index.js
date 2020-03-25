@@ -6,13 +6,19 @@ import Login from '../components/auth/Login.vue'
 import AdminDashboard from '../components/admin/AdminDashboard.vue'
 import AdminRequest from '../components/admin/NgoRequests.vue'
 import Demo from '../components/Demo.vue'
-import NgoProfile from '../components/Home/NgoProfile.vue'
+import NgoProfile from '../components/NGO/NgoProfile.vue'
 import DemoRegister from '../components/auth/DemoRegister'
 import RequestCard from '../components/Home/RequestCard'
+import NgoEdit from '../components/NGO/NgoEdit'
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path:'/ngoedit/:id',
+    name:'NgoEdit',
+    component:NgoEdit
+  },
   {
     path: '/',
     name: 'Home',
