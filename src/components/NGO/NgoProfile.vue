@@ -16,34 +16,13 @@
                         </li>
                         <li><router-link :to="{name:'NgoEdit', params:{id:NGOs.email}}">
                             <a href="" class="btn btn-success text-center btn-block">Edit Account</a>
-<<<<<<< HEAD
-                                
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="row">
-                        <div class="card bg-light mb-3" style="width: 20rem; box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);">
-                            <div class="card-body">
-                                <h3 class="card-header">Request Card</h3>
-                                <hr>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="usr" placeholder="Title of the Request." v-model="reqtitle">
-                                    <br>    
-                                    <input type="text" class="form-control" id="usr" placeholder="Cause/Event ?." v-model="reqcause">
-                                    <br>  
-                                    <textarea class="form-control" aria-label="With textarea" placeholder="A brief about why you need donation for this event." v-model="reqbrief"></textarea>
-                                </div>
-                                <button type="button" class="btn btn-primary" v-on:click="request(NGOs.name,NGOs.cause,NGOs.email)">Request!</button>
-                            </div>
-=======
-=======
+
                             </router-link>
->>>>>>> 93f2057e5f0d9d7e8f4b80e872d1808dde016a20
                         </li>
                         <li></li>
                         <li>
                             <div class="btn-group-vertical btn-block" v-on:click="logout">
-                                <a href="" class="btn btn-default"><i class="fa fa-sign-out pull-right"></i>Logout</a>
+                                <button class="btn btn-default"><i class="fa fa-sign-out pull-right"></i>Logout</button>
                             </div>
                         </li>
                     </ul>
@@ -236,6 +215,7 @@ methods:{
             }, function(error) {
             // An error happened.
         });
+        this.$router.push('/login')
     }
     
 }
