@@ -16,6 +16,7 @@
                         </li>
                         <li><router-link :to="{name:'NgoEdit', params:{id:NGOs.email}}">
                             <a href="" class="btn btn-success text-center btn-block">Edit Account</a>
+<<<<<<< HEAD
                                 
                         </div>
                     </div>
@@ -35,12 +36,14 @@
                                 <button type="button" class="btn btn-primary" v-on:click="request(NGOs.name,NGOs.cause,NGOs.email)">Request!</button>
                             </div>
 =======
+=======
+                            </router-link>
+>>>>>>> 93f2057e5f0d9d7e8f4b80e872d1808dde016a20
                         </li>
                         <li></li>
                         <li>
                             <div class="btn-group-vertical btn-block" v-on:click="logout">
-                                <a  class="btn btn-default"><i class="fa fa-sign-out pull-right"></i>Logout</a>
->>>>>>> 0fbd0ebfef8fa0fadc0b7fbba9d65f045d4272fc
+                                <a href="" class="btn btn-default"><i class="fa fa-sign-out pull-right"></i>Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -85,8 +88,8 @@
     <div class="divider"></div>
     <div class="panel rounded shadow">
         <form action="...">
-            <label v-if="NGOs.bio==''" class="form-control" rows="2" placeholder="What are you doing?...">Bio here.. it seems you haven't uploaded your bio yet, goto EDIT PROFILE.  </label>
-            <label v-if="NGOs.bio!=''" class="form-control" rows="2" placeholder="What are you doing?...">{{NGOs.bio}} </label>
+            <label v-if="NGOs.bio==NULL" class="form-control" rows="2" placeholder="What are you doing?...">Bio here.. it seems you haven't uploaded your bio yet, goto EDIT PROFILE.  </label>
+            <label v-if="NGOs.bio!=NULL" class="form-control" rows="2" placeholder="What are you doing?...">{{NGOs.bio}} </label>
         </form>
         <!-- /.panel-footer -->
     </div><!-- /.panel -->
@@ -228,12 +231,11 @@ methods:{
     },
     logout(){
         firebase.auth().signOut().then(function() {
-                alert('user signedout')
+            console.log('signout successful');
+            alert('user signedout')
             }, function(error) {
-                a=0;
+            // An error happened.
         });
-            this.$router.push('/login');
-        
     }
     
 }
