@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Register from '../components/auth/Register.vue'
 import Home from '../components/Home/Home.vue'
-import Home2 from '../components/NGO/Home2.vue'
 import Login from '../components/auth/Login.vue'
 import AdminDashboard from '../components/admin/AdminDashboard.vue'
 import AdminRequest from '../components/admin/NgoRequests.vue'
@@ -36,11 +35,6 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
-  },
-  {
-    path: '/home',
-    name: 'Home2',
-    component: Home2
   },
   {
     path: '/ngoprofile/:id',
