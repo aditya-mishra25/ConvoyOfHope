@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Register from '../components/auth/Register.vue'
 import Home from '../components/Home/Home.vue'
+import Home2 from '../components/NGO/Home2.vue'
 import Login from '../components/auth/Login.vue'
 import AdminDashboard from '../components/admin/AdminDashboard.vue'
 import AdminRequest from '../components/admin/NgoRequests.vue'
@@ -10,10 +11,22 @@ import NgoProfile from '../components/NGO/NgoProfile.vue'
 import DemoRegister from '../components/auth/DemoRegister'
 import RequestCard from '../components/Home/RequestCard'
 import NgoEdit from '../components/NGO/NgoEdit'
+import ProfileUser from '../components/NGO/ProfileUSerView'
+import Donate from '../components/Donate/donate'
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path:'/donate/:id',
+    name:'Donate',
+    component:Donate
+  },
+  {
+    path:'/ngoprofileview/:id',
+    name:'NgoProfileView',
+    component:ProfileUser
+  },
   {
     path:'/ngoedit/:id',
     name:'NgoEdit',
@@ -23,6 +36,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/home',
+    name: 'Home2',
+    component: Home2
   },
   {
     path: '/ngoprofile/:id',

@@ -45,6 +45,13 @@ import firebase from 'firebase'
       }
     },
       created(){
+        firebase.auth().onAuthStateChanged(user=> {
+          if (user) {
+            console.log(user)
+          } else {
+            this.$router.push('/login')
+          }
+        });
         firebase.firestore().collection('NgoRequests').get().then(
             querySnapshot => {
                 querySnapshot.forEach(doc =>{

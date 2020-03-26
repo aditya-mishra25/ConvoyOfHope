@@ -7,7 +7,8 @@
               <h4>Casue: {{ngo.cause}}</h4>
               <h4>Location: {{ngo.location}}</h4>
               <p>A Brief about the ngo.</p>
-              <b-button variant="info">Visit</b-button>
+              
+              <router-link :to="{name:'NgoProfileView', params:{id:ngo.email}}"><b-button variant="info">Visit</b-button></router-link>
               <!-- <router-link v-bind:to="{name:'NgoProfile', params:{id:ngo.id}}">Visit</router-link> -->
     </div>
       </div>
@@ -40,7 +41,6 @@ export default {
                 })
             }
         )
-        
 }
 }
 </script>

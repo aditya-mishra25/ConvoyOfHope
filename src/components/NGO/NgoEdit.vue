@@ -82,6 +82,10 @@
                               <label>About</label>
                               <textarea class="form-control" rows="5" placeholder="NGO's Bio" v-model="bio"></textarea>
                             </div>
+                            <div class="form-group">
+                              <label>Would like to add up some of your events?</label>
+                              <textarea class="form-control" rows="5" placeholder="Events" v-model="event"></textarea>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -152,10 +156,21 @@ export default {
             currentpwd:"",
             newpwd:"",
             newconpwd:"",
-            NGOs:""
+            NGOs:"",
+            events:""
         }
     },
     created(){
+      firebase.auth().onAuthStateChanged(user=> {
+          if (user) {
+            if(user.email == "admin@me.com"){
+              this.$router.push('/admindashboard')
+            }
+            console.log(user.email)
+          } else {
+            this.$router.push('/login')
+          }
+        });
         var id= this.$route.params.id;
         firebase.firestore().collection('NGO').where('email','==',id).get().then(
             querySnapshot => {
@@ -169,7 +184,9 @@ export default {
                         'location':doc.data().location,
                         'contact':doc.data().contact,
                         'url':doc.data().url,
-                        'imgurl':doc.data().imageurl
+                        'imgurl':doc.data().imageurl,
+                        'event':doc.data().event,
+                        'bio':doc.data().bio
                     }
                     this.NGOs=data;
                     
@@ -186,7 +203,8 @@ methods:{
           update({
                   location:this.location,
                   contact:this.phone,
-                  bio:this.bio
+                  bio:this.bio,
+                  event:this.NGOs.event+ ",," +this.event
                 });
       }
       else{

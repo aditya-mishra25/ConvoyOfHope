@@ -63,6 +63,7 @@
 </template>
 
 <script>
+import firebase from 'firebase'
 import ngokids from '../../assets/ngo.jpg'
 import Requests from './Request.vue'
 import NgoList from './Ngo.vue'

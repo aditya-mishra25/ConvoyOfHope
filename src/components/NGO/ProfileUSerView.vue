@@ -14,16 +14,7 @@
                             <h4 class="text-capitalize">{{NGOs.name}}</h4>
                             <p class="text-muted text-capitalize">{{NGOs.cause}}</p>
                         </li>
-                        <li><router-link :to="{name:'NgoEdit', params:{id:NGOs.email}}">
-                            <a href="" class="btn btn-success text-center btn-block">Edit Account</a>
-                            </router-link>
-                        </li>
-                        <li></li>
-                        <li>
-                            <div class="btn-group-vertical btn-block" v-on:click="logout">
-                                <button class="btn btn-default"><i class="fa fa-sign-out pull-right"></i>Logout</button>
-                            </div>
-                        </li>
+                        
                     </ul>
                 </div>
             </div>
@@ -65,56 +56,55 @@
     </div><!-- /.profile-cover -->
     <div class="divider"></div>
     <div class="panel rounded shadow">
-        <form action="...">
-            <label v-if="NGOs.bio==NULL" class="form-control" rows="2" placeholder="What are you doing?...">Bio here.. it seems you haven't uploaded your bio yet, goto EDIT PROFILE.  </label>
-            <label v-if="NGOs.bio!=NULL" class="form-control" rows="2" placeholder="What are you doing?...">{{NGOs.bio}} </label>
-        </form>
-        <!-- /.panel-footer -->
+            <b-card>
+                <h4>Bio</h4>
+                <p>{{NGOs.bio}}</p>
+            </b-card>
     </div><!-- /.panel -->
-    <div class="row" style="margin-top:18px">
-        <div class="card bg-light mb-3" style="margin-left:15px; width: 20rem; box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);">
-        <div class="card-body">
-            <h3 class="card-header">Request Card</h3>
-            <hr>
-            <div class="form-group">
-                <input type="text" class="form-control" id="usr" placeholder="Title of the Request." v-model="reqtitle">
-                <br>    
-                <input type="text" class="form-control" id="usr" placeholder="Cause/Event ?." v-model="reqcause">
-                <br>  
-                <textarea class="form-control" aria-label="With textarea" placeholder="A brief about why you need donation for this event." v-model="reqbrief"></textarea>
+
+    <div class="panel rounded shadow">
+        <b-card>
+            <h4>Events</h4>
+            <p v-for="(event,index) in eventrender" v-bind:key="index">
+               {{index+1}}. {{event}}
+            </p>
+        </b-card>
+    </div>
+
+    <div class="panel rounded shadow">
+        <div class="card bg-light" style=" ">
+            <div class="card-body">
+                <h3 class="card-header">Requests</h3>
+                <hr>
+                <table class="table table-striped" style="width:100%">
+                    <thead class="thead-dark">
+                        <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Cause</th>
+                        <th scope="col">Delete</th>
+                        <th scope="col">Donate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr scope="row" v-for="item in Req" v-bind:key="item.id">
+                            
+                            <td>{{item.title}}</td>
+                            <td>{{item.reqcause}}</td>
+                            <td v-if="item.status==null" style="color:red;">Pending</td>
+                            <td v-if="item.status!=null" style="color:green">Completed</td>
+                            <td><b-button variant="success" v-on:click="Donate(item.id)">Donate</b-button></td>
+                        
+                        </tr>
+                    </tbody>
+                </table> 
             </div>
-            <button type="button" class="btn btn-primary" v-on:click="request(NGOs.name,NGOs.cause,NGOs.email)">Request!</button>
         </div>
+    </div>
+    <div class="row" style="margin-top:18px">
+        
         </div>
 
-        <div class="card bg-light mb-3" style="width: 30rem; margin-left:24px; box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);">
-                            <div class="card-body">
-                                <h3 class="card-header">Past Requests</h3>
-                                <hr>
-                                <table class="table table-striped" style="width:100%">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                        <th scope="col">Request ID</th>
-                                        <th scope="col">Title</th>
-                                        <th scope="col">Cause</th>
-                                        <th scope="col">Delete</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr scope="row" v-for="item in Req" v-bind:key="item.id">
-                                            <td>{{item.id}}</td>
-                                            <td>{{item.title}}</td>
-                                            <td>{{item.reqcause}}</td>
-                                            <td v-if="item.status==null" style="color:red;">Pending</td>
-                                            <td v-if="item.status!=null" style="color:green">Completed</td>
-                                        </tr>
-                                    </tbody>
-                                    </table>
-                                
-                                
-                            </div>
-                            </div>
-    </div>
+        
     </div>
     </div>
 </div>
@@ -133,20 +123,11 @@ export default {
             reqcause:'',
             reqbrief:'',
             NGOs:"",
-            Req:[]
+            Req:[],
+            eventrender:""
         }
     },
     created(){
-        firebase.auth().onAuthStateChanged(user=> {
-          if (user) {
-              if(user.email == 'admin@me.com'){
-              this.$router.push('/admindashboard')
-            }
-            console.log(user)
-          } else {
-            this.$router.push('/login')
-          }
-        });
         var id= this.$route.params.id;
         // var id = 'AA@aa.com'
         firebase.firestore().collection('NGO').where('email','==',id).get().then(
@@ -162,14 +143,20 @@ export default {
                         'contact':doc.data().contact,
                         'url':doc.data().url,
                         'imgurl':doc.data().imageurl,
-                        'bio':doc.data().bio
+                        'bio':doc.data().bio,
+                        'event':doc.data().event
                     }
                     this.NGOs=data;
-                    
                 });
+                var a = this.NGOs.event
+                this.eventrender = a.split(',')
+                console.log(this.eventrender)
+
+            },
+            function(){
+                console.log(this.NGOs)
             }
         );
-
         firebase.firestore().collection('Requests').where('email','==',id).get().then(
             querySnapshot => {
                 querySnapshot.forEach(doc =>{

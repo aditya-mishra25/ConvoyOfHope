@@ -17,7 +17,7 @@
   </thead>
   <tbody>
     <tr scope="row" v-for="item in items" v-bind:key="item.id">
-      <td><b class="chip"><router-link :to="{name:'NgoProfile', params:{id:item.email}}">{{item.name}}</router-link></b></td>
+      <td><b class="chip"><router-link :to="{name:'NgoProfileView', params:{id:item.email}}">{{item.name}}</router-link></b></td>
       <td>{{item.cause}}</td>
       <td>{{item.location}}</td>
       <td>{{item.date}}</td>
@@ -43,6 +43,13 @@ import axios from 'axios'
       }
     },
       created(){
+        firebase.auth().onAuthStateChanged(user=> {
+          if (user) {
+            console.log(user)
+          } else {
+            this.$router.push('/login')
+          }
+        });
         firebase.firestore().collection('NGO').get().then(
             querySnapshot => {
                 querySnapshot.forEach(doc =>{
