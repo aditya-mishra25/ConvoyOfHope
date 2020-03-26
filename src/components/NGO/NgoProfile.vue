@@ -17,32 +17,11 @@
                         <li><router-link :to="{name:'NgoEdit', params:{id:NGOs.email}}">
                             <a href="" class="btn btn-success text-center btn-block">Edit Account</a>
                             </router-link>
-<<<<<<< HEAD
-                                
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="row">
-                        <div class="card bg-light mb-3" style="width: 20rem; box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);">
-                            <div class="card-body">
-                                <h3 class="card-header">Request Card</h3>
-                                <hr>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="usr" placeholder="Title of the Request." v-model="reqtitle">
-                                    <br>    
-                                    <input type="text" class="form-control" id="usr" placeholder="Cause/Event ?." v-model="reqcause">
-                                    <br>  
-                                    <textarea class="form-control" aria-label="With textarea" placeholder="A brief about why you need donation for this event." v-model="reqbrief"></textarea>
-                                </div>
-                                <button type="button" class="btn btn-primary" v-on:click="request(NGOs.name,NGOs.cause,NGOs.email)">Request!</button>
-                            </div>
-=======
                         </li>
                         <li></li>
                         <li>
                             <div class="btn-group-vertical btn-block" v-on:click="logout">
-                                <a  class="btn btn-default"><i class="fa fa-sign-out pull-right"></i>Logout</a>
->>>>>>> 0fbd0ebfef8fa0fadc0b7fbba9d65f045d4272fc
+                                <a href="" class="btn btn-default"><i class="fa fa-sign-out pull-right"></i>Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -87,8 +66,8 @@
     <div class="divider"></div>
     <div class="panel rounded shadow">
         <form action="...">
-            <label v-if="NGOs.bio==''" class="form-control" rows="2" placeholder="What are you doing?...">Bio here.. it seems you haven't uploaded your bio yet, goto EDIT PROFILE.  </label>
-            <label v-if="NGOs.bio!=''" class="form-control" rows="2" placeholder="What are you doing?...">{{NGOs.bio}} </label>
+            <label v-if="NGOs.bio==NULL" class="form-control" rows="2" placeholder="What are you doing?...">Bio here.. it seems you haven't uploaded your bio yet, goto EDIT PROFILE.  </label>
+            <label v-if="NGOs.bio!=NULL" class="form-control" rows="2" placeholder="What are you doing?...">{{NGOs.bio}} </label>
         </form>
         <!-- /.panel-footer -->
     </div><!-- /.panel -->
@@ -230,12 +209,11 @@ methods:{
     },
     logout(){
         firebase.auth().signOut().then(function() {
-                alert('user signedout')
+            console.log('signout successful');
+            alert('user signedout')
             }, function(error) {
-                a=0;
+            // An error happened.
         });
-            this.$router.push('/login');
-        
     }
     
 }
