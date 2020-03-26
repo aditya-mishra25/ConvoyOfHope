@@ -4,136 +4,95 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                            <div class="file btn btn-lg btn-primary">
+                            <img :src="NGOs.imgurl" alt="" height="100px" width="100px"/>
+                            <!-- <div class="file btn btn-lg btn-primary">
                                 Change Photo
                                 <input type="file" name="file"/>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
-                                    <h5>
-                                        {{NGOs.name}}
-                                    </h5>
-                                    <h6>
-                                        {{NGOs.cause}}
-                                    </h6>
-                                    <p class="proile-rating">RANKINGS : <span>8/10</span></p>
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-work">
-                            <p>WORK LINK</p>
-                            <a href="">Website Link</a><br/>
-                            <a href="">Bootsnipp Profile</a><br/>
-                            <a href="">Bootply Profile</a>
-                            <p>SKILLS</p>
-                            <a href="">Web Designer</a><br/>
-                            <a href="">Web Developer</a><br/>
-                            <a href="">WordPress</a><br/>
-                            <a href="">WooCommerce</a><br/>
-                            <a href="">PHP, .Net</a><br/>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="tab-content profile-tab" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                        <div class="row">
+                              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row" style="margin-top:10px">
                                             <div class="col-md-2">
                                                 <label>Name</label>
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-md-2" style="color:blue">
                                                 <p>{{NGOs.name}}</p>
                                             </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="col-md-2">
                                                 <label>Email</label>
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-md-2" style="color:blue">
                                                 <p>{{NGOs.email}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
+                                            <div class="col-md-2">
+                                                <label>Location</label>
+                                            </div>
+                                            <div class="col-md-2" style="color:blue">
+                                                <p>{{NGOs.location}}</p>
+                                            </div>
+                                    
+                                            <div class="col-md-2">
+                                                <label>Phone</label>
+                                            </div>
+                                            <div class="col-md-2" style="color:blue">
+                                                <p>{{NGOs.contact}}</p>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="row">
                                             <div class="col-md-2">
                                                 <label>Phone</label>
                                             </div>
                                             <div class="col-md-2">
                                                 <p>{{NGOs.contact}}</p>
                                             </div>
-                                        </div>
-                                        <div class="row">
+                                        </div> -->
+                                        <!-- <div class="row">
                                             <div class="col-md-2">
-                                                <label></label>
+                                                <label>Location</label>
                                             </div>
                                             <div class="col-md-2">
-                                                <p>Web Developer and Designer</p>
+                                                <p>{{NGOs.location}}</p>
                                             </div>
-                                        </div>
-                            </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Experience</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>Expert</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Hourly Rate</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>10$/hr</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Total Projects</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>230</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>English Level</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>Expert</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Availability</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>6 months</p>
-                                            </div>
-                                        </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label>Your Bio</label><br/>
-                                        <p>Your detail description</p>
-                                    </div>
-                                </div>
-                            </div>
+                                        </div> -->
+                                        <hr>
+                            </div>          
                         </div>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                    </div>
+                </div>
+                <div class="row"><!--here comes the code for text boxes which will hold data for events and other info of the ngo-->
+                    <div class="col-md">
+                        <div class="profile-work">
+                             <!-- <ul class="list-group" style="margin-top: 10px">
+                                <li class="list-group-item text-muted">Website</li>
+                            </ul> -->
+                            
+                            
+                            <ul class="list-group" style="margin-top:10px">
+                                <li class="list-group-item text-muted">Connect Through..</i></li>
+                                <li class="list-group-item text-right"><span class="pull-left"><strong>Facebook</strong></span><i class="fa fa-facebook fa-2x"></i></li>
+                                <li class="list-group-item text-right"><span class="pull-left"><strong>Twitter</strong></span><i class="fa fa-twitter fa-2x"></i></li>
+                                <li class="list-group-item text-right"><span class="pull-left"><strong>Instagram</strong></span><i class="fa fa-instagram fa-2x"></i></li>
+                                <!-- <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li> -->
+                            </ul> 
+                                
+                            <!-- <div class="panel panel-default">
+                                <div class="panel-heading">Social Media</div>
+                                <div class="panel-body">
+                                    <i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i class="fa fa-google-plus fa-2x"></i>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        
                     </div>
                 </div>
             </form>           
@@ -162,7 +121,9 @@ export default {
                         'date':doc.data().est,
                         'email':doc.data().email,
                         'location':doc.data().location,
-                        'contact':doc.data().contact
+                        'contact':doc.data().contact,
+                        'url':doc.data().url,
+                        'imgurl':doc.data().imageurl
                     }
                     this.NGOs=data;
                     
@@ -176,6 +137,10 @@ export default {
 
 
 <style scoped>
+img{
+    max-height: 200px;
+    max-width: 310px;
+}
 body{
     background: -webkit-linear-gradient(left, #3931af, #00c6ff);
 }
