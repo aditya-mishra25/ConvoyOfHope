@@ -1,22 +1,53 @@
 <template>
-  <div class='main'>
-      <div class="block1">
-          <b-card>
-              <h1>Name of the NGO</h1>
-              <p><h4>Casue:</h4><h5>Childrens Annual day</h5>
-              <p>A brief about the event happening and why they need donation for this event.</p>
+<div>
+  <div class='main card bg-light' v-for="req in Requests"  v-bind:key="req.id">
+      <div class="card-body block1">
+              <h1 class='card-header'>{{req.name}}</h1>
+              <p><h4>Casue: {{req.cause}}</h4>
+              <p>{{req.brief}}</p>
               <b-button variant="info">Donate</b-button>
-          </b-card>
       </div>
+  </div>
   </div>
 </template>
 
 <script>
+import firebase from 'firebase';
+import db from '../../main'
 export default {
+    data(){
+        return {
+            Requests:[]
+        }
+    },
 
+    created(){
+        firebase.firestore().collection("Requests").get().then(
+            querySnapshot=>{
+                querySnapshot.forEach(doc=>{
+                    const req={
+                        'id':doc.id,
+                        'brief':doc.data().brief,
+                        'title':doc.data().title,
+                        'name':doc.data().name,
+                        'cause':doc.data().cause,
+                        'email':doc.data().email
+                    }
+                    this.Requests.push(req);
+                    
+                })
+            
+        })
+    console.log(this.Requests);
+}
 }
 </script>
 
 <style scoped>
-
+    .main{
+        margin-left: 5%;
+        margin-top: 5%;
+        max-width: 80%;
+         box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);
+    }
 </style>

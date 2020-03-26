@@ -1,5 +1,5 @@
 <template>
-  <div class='blockmain'>
+  <div class='blockmain' >
       <div class="block" :style="{ backgroundImage: `url(${ngokids})` }">
           <div class="block1">
             <h4>Donate for a Cause!!</h4>
@@ -9,6 +9,7 @@
             <br><br>
           </div>
        </div>
+
        <div class='block2'>
             <b-navbar toggleable="lg" type="light" variant="light">
                 <b-navbar-nav>
@@ -17,6 +18,7 @@
                 </b-navbar-nav>
             </b-navbar>
        </div>
+       <div class="mainblock2">
        <div class='block3'>
            <div v-if="req">
                <app-request></app-request>
@@ -24,8 +26,40 @@
            <div v-if="ngo">
                <app-ngolist></app-ngolist>
            </div>
-       </div>
-  </div>
+       </div> 
+       <div class="block4">
+           <div>
+<div class='main card bg-light'>
+<div class="card-body block4">
+        <h1 class='card-header'>Donations</h1>
+        <div>
+                                       
+                                        <div>
+                                            <h4>[Name]</h4>
+                                            
+                                        </div>
+                                    </div>
+                                    <div>
+                                        
+                                        <div>
+                                            <h4>[Name]</h4>
+                                           
+                                        </div>
+                                    </div>
+                                    <div>
+                                        
+                                        <div>
+                                            <h4>[Name]</h4>
+                                           
+                                        </div>
+                                    </div>
+        
+</div>
+</div>
+</div>                     
+       </div> 
+       </div>  
+       </div>  
 </template>
 
 <script>
@@ -89,6 +123,20 @@ export default {
     margin-left: 2%;
     margin-right: 2%;
 }
+.mainblock2{
+    display: flex;
+}
+.block3{
+    flex:1
+}
+.block4{
+    flex:1
+}
 
-
+.main{
+      margin-left: 5%;
+        margin-top: 5%;
+        max-width: 80%;
+         box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);
+}
 </style>

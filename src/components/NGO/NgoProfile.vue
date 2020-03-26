@@ -78,12 +78,6 @@
                                 <button type="button" class="btn btn-primary" style="margin-top:10px; width:100%">Edit Profile</button>
                             </router-link>
                                 
-                            <!-- <div class="panel panel-default">
-                                <div class="panel-heading">Social Media</div>
-                                <div class="panel-body">
-                                    <i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i class="fa fa-google-plus fa-2x"></i>
-                                </div>
-                            </div> -->
                         </div>
                     </div>
                     <div class="col-md-8">
