@@ -16,8 +16,6 @@
                         </li>
                         <li><router-link :to="{name:'NgoEdit', params:{id:NGOs.email}}">
                             <a href="" class="btn btn-success text-center btn-block">Edit Account</a>
-                            </router-link>
-<<<<<<< HEAD
                                 
                         </div>
                     </div>
