@@ -29,7 +29,7 @@
           </div>
           <div class="card-footer">
               <div class="d-flex justify-content-center">
-                <a href="#">Forgot your password?</a>
+                <b-button v-on:click="forgot" style="background:none; border:none; color:#FFC312">Forgot your password?</b-button>
               </div>
             </div>
         </div>
@@ -48,6 +48,7 @@ background-image: url('https://images.unsplash.com/photo-1488521787991-ed7bbaae7
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
+width:100%;
 font-family: 'Numans', sans-serif;
 }
 
@@ -183,7 +184,23 @@ export default {
           }
         );
       e.preventDefault();
-    }
+    },
+    forgot(){
+      var auth = firebase.auth();
+      var emailAddress = this.email;
+      var x = confirm("Do you wish to reset your password?")
+      if(x==true && this.email!=""){
+          auth.sendPasswordResetEmail(emailAddress).then(function() {
+          alert('password reset mail sent to your email address')
+        }).catch(function(error) {
+          // An error happened.
+        });
+      }
+      else{
+        alert('enter your email address first')
+      }
+      
+          }
   }
 };
 </script>

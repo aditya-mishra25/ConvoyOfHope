@@ -5,13 +5,16 @@
                     <div class="col-md-3 register-left">
                         <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
                         <h3>Welcome</h3>
-                        <p>You are 30 seconds away from earning your own money!</p>
-                        <input type="submit" name="" value="Login"/><br/>
+                        <h6 style="margin-bottom:none">To</h6>
+                        <h3>ConvoyOfHope</h3>
+                        <router-link to="/login">
+                        <input type="submit" value="Login"/><br/>
+                        </router-link>
                     </div>
                     <div class="col-md-9 register-right">
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <h3 class="register-heading">Apply as a Employee</h3>
+                                <h3 class="register-heading">Apply as a NGO</h3>
                                 <div class="row register-form">
                                     <div class="col-md-6">
                                         <div class="form-group">

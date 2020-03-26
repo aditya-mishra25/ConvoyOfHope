@@ -20,7 +20,7 @@
                         </li>
                         <li></li>
                         <li>
-                            <div class="btn-group-vertical btn-block">
+                            <div class="btn-group-vertical btn-block" v-on:click="logout">
                                 <a href="" class="btn btn-default"><i class="fa fa-sign-out pull-right"></i>Logout</a>
                             </div>
                         </li>
@@ -206,6 +206,14 @@ methods:{
                     alert("Error removing the request: ",error);
             });
         }
+    },
+    logout(){
+        firebase.auth().signOut().then(function() {
+            console.log('signout successful');
+            alert('user signedout')
+            }, function(error) {
+            // An error happened.
+        });
     }
     
 }

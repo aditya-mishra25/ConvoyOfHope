@@ -179,18 +179,22 @@ export default {
 },
 methods:{
     Change(){
-        var id= this.$route.params.id;
+       var id= this.$route.params.id;
         const d = this.NGOs.name;
-        console.log(d)
-        
-        firebase.firestore().collection('NGO').doc(d).
-        update({
-                location:this.location,
-                contact:this.phone,
-                bio:this.bio
+      if(this.location!="" && this.phone!=""){
+          firebase.firestore().collection('NGO').doc(d).
+          update({
+                  location:this.location,
+                  contact:this.phone,
+                  bio:this.bio
                 });
+      }
+      else{
+        alert('Location and Phone number cannot be empty')
+      }
+        
 
-        if(this.newpwd == this.newconpwd){
+        if(this.newpwd == this.newconpwd && this.currentpwd != ""){
             var user = firebase.auth().currentUser;
             const uuidd=user.uid
             var newPassword = this.newpwd;
@@ -201,18 +205,23 @@ methods:{
 
             firebase.auth().currentUser.updatePassword(newPassword).then(function(){
 
-                console.log('password changed')
+                alert('passoword updated successfully')
 
             }).catch(function(err){
-                console.log(err)
+                alert('sorry there is some problem updating the password, please try again later!')
             });
 
         }).catch(function(err){
-            console.log(err)
+            alert('Current password entered does not match your old password')
         });
-        
+        }
+        else{
+          if(this.newpwd!="" && this.newconpwd!="" && this.currentpwd!=""){
+            alert("New password and Confirm new passowrd doesnot match & current passowrd should'nt be empty")
+            }
         }
         
+        this.$router.push('/ngoprofile/'+id);
     }
 }
 }
