@@ -1,14 +1,18 @@
 <template>
 <div>
-  <div class='main card bg-light' v-for="req in Requests"  v-bind:key="req.id">
+<div v-for="req in Requests"  v-bind:key="req.id">
+  <div v-if="req.status!='completed'">
+      <div class='main card bg-light'>
       <div class="card-body block1">
               <h1 class='card-header'>{{req.name}}</h1>
               <p><h4>Casue: {{req.cause}}</h4>
               <p>{{req.brief}}</p>
-              <b-button variant="info">Donate</b-button>
+              <router-link :to="{name:'Donate' ,params:{id:req.id}}"><b-button variant="info">Donate</b-button></router-link>
+      </div>
       </div>
   </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -31,7 +35,8 @@ export default {
                         'title':doc.data().title,
                         'name':doc.data().name,
                         'cause':doc.data().cause,
-                        'email':doc.data().email
+                        'email':doc.data().email,
+                        'status':doc.data().status
                     }
                     this.Requests.push(req);
                     

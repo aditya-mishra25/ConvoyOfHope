@@ -29,37 +29,21 @@
        </div> 
        <div class="block4">
            <div>
-<div class='main card bg-light'>
-<div class="card-body block4">
-        <h1 class='card-header'>Donations</h1>
-        <div>
-                                       
-                                        <div>
-                                            <h4>[Name]</h4>
-                                            
-                                        </div>
-                                    </div>
-                                    <div>
-                                        
-                                        <div>
-                                            <h4>[Name]</h4>
-                                           
-                                        </div>
-                                    </div>
-                                    <div>
-                                        
-                                        <div>
-                                            <h4>[Name]</h4>
-                                           
-                                        </div>
-                                    </div>
-        
-</div>
-</div>
-</div>                     
+                <div class='main card bg-light'>
+                <div class="card-body block4">
+                        <h1 class='card-header'>Donations</h1>
+                        <div v-for="donor in Donors" v-bind:key="donor.id">                         
+                            <div>
+                                <h4><span style="color:blue">{{donor.donorname}}</span> Donated for NGO <span style="color:green">{{donor.ngoname}}</span></h4>
+                                <hr> 
+                            </div>
+                        </div>
+                </div>
+                </div>
+            </div>                     
        </div> 
-       </div>  
-       </div>  
+    </div>  
+</div>  
 </template>
 
 <script>
@@ -76,10 +60,29 @@ export default {
             ngo :true,
             req:false,
             name:"Request's",
-            dummyname:""
+            dummyname:"",
+            Donors:[]
         }
     },
-    
+    created(){
+        firebase.firestore().collection("Donors").get().then(
+            querySnapshot=>{
+                querySnapshot.forEach(doc=>{
+                    const don={
+                        'requestid':doc.id,
+                        'donorname':doc.data().donorname,
+                        'donoremail':doc.data().donoremail,
+                        'donorphone':doc.data().donorphone,
+                        'amountdonated':doc.data().amountdonated,
+                        'ngoname':doc.data().ngoname,
+                    }
+                    this.Donors.push(don);
+                })
+                console.log(this.Donors)
+            
+        })
+    console.log(this.Requests);
+    },
     components:{
         'app-request':Requests,
         'app-ngolist':NgoList
@@ -126,6 +129,9 @@ export default {
 }
 .mainblock2{
     display: flex;
+    margin-left:10% ;
+    margin-right:10% ;
+    flex-wrap: wrap;
 }
 .block3{
     flex:1

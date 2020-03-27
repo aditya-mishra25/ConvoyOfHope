@@ -65,13 +65,23 @@
     </div><!-- /.profile-cover -->
     <div class="divider"></div>
     <div class="panel rounded shadow">
-        <form action="...">
-            <label v-if="NGOs.bio==NULL" class="form-control" rows="2" placeholder="What are you doing?...">Bio here.. it seems you haven't uploaded your bio yet, goto EDIT PROFILE.  </label>
-            <label v-if="NGOs.bio!=NULL" class="form-control" rows="2" placeholder="What are you doing?...">{{NGOs.bio}} </label>
-        </form>
-        <!-- /.panel-footer -->
-    </div><!-- /.panel -->
-    <div class="row" style="margin-top:18px">
+            <b-card>
+                <h4>Bio</h4>
+                
+                <p  v-if="NGOs.bio==null">Seems this NGO haven't uploaded any bio</p>
+                <p  v-if="NGOs.bio!=null">{{NGOs.bio}}</p>
+            </b-card>
+    </div>
+    <div class="panel rounded shadow">
+        <b-card>
+            <h4>Events</h4>
+            
+            <p v-for="(event,index) in eventrender" v-bind:key="index">
+               {{index+1}}. {{event}}
+            </p>
+        </b-card>
+    </div>
+    <div class="row" style="margin-top:2px">
         <div class="card bg-light mb-3" style="margin-left:15px; width: 20rem; box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);">
         <div class="card-body">
             <h3 class="card-header">Request Card</h3>
@@ -80,7 +90,9 @@
                 <input type="text" class="form-control" id="usr" placeholder="Title of the Request." v-model="reqtitle">
                 <br>    
                 <input type="text" class="form-control" id="usr" placeholder="Cause/Event ?." v-model="reqcause">
-                <br>  
+                <br>     
+                <input type="number" class="form-control" id="usr" placeholder="Amount Required (in USD)." v-model="amount">
+                <br> 
                 <textarea class="form-control" aria-label="With textarea" placeholder="A brief about why you need donation for this event." v-model="reqbrief"></textarea>
             </div>
             <button type="button" class="btn btn-primary" v-on:click="request(NGOs.name,NGOs.cause,NGOs.email)">Request!</button>
@@ -133,7 +145,9 @@ export default {
             reqcause:'',
             reqbrief:'',
             NGOs:"",
-            Req:[]
+            Req:[],
+            amount:'',
+            eventrender:""
         }
     },
     created(){
@@ -162,11 +176,14 @@ export default {
                         'contact':doc.data().contact,
                         'url':doc.data().url,
                         'imgurl':doc.data().imageurl,
-                        'bio':doc.data().bio
+                        'bio':doc.data().bio,
+                        'event':doc.data().event
                     }
                     this.NGOs=data;
                     
                 });
+                 var a = this.NGOs.event
+                this.eventrender = a.split(',')
             }
         );
 
@@ -191,19 +208,25 @@ export default {
 },
 methods:{
     request(name,cause,email){
+        if(this.reqtitle=="" && this.reqcause==null && this.reqbrief==null && this.amount==null){
+            alert('Please enter all the values before hitting the submit button!')
+        }
+        else{
         firebase.firestore().collection('Requests').doc(name+" "+this.reqtitle).set({
             name:name,
             cause:this.reqcause,
             title:this.reqtitle,
             brief:this.reqbrief,
+            amount:this.amount,
             email:email
         }).then(function(docRef){
             alert('Request Succesfully Submitted!!')
         }).catch(function(error){
             console.log(error);
         });
+        }
 
-        this.reqtitle = this.reqcause = this.reqbrief='';
+        this.reqtitle = this.reqcause = this.reqbrief= this.amount ='';
     },
     Delete(id){
         var y= confirm("Do you really want to delete the Request?");

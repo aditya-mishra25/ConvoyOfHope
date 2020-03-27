@@ -47,7 +47,6 @@
     <div class="profile-cover">
         <div class="cover rounded shadow no-overflow">
             <div class="inner-cover">
-                <!-- Start offcanvas btn group menu: This menu will take position at the top of profile cover (mobile only). -->
                 
                 <img  :src="ngokids" class="img-responsive full-width" alt="cover" style="max-height:200px;">
             </div>
@@ -58,6 +57,7 @@
     <div class="panel rounded shadow">
             <b-card>
                 <h4>Bio</h4>
+                <hr>
                 <p>{{NGOs.bio}}</p>
             </b-card>
     </div><!-- /.panel -->
@@ -65,6 +65,7 @@
     <div class="panel rounded shadow">
         <b-card>
             <h4>Events</h4>
+            <hr>
             <p v-for="(event,index) in eventrender" v-bind:key="index">
                {{index+1}}. {{event}}
             </p>
@@ -92,7 +93,7 @@
                             <td>{{item.reqcause}}</td>
                             <td v-if="item.status==null" style="color:red;">Pending</td>
                             <td v-if="item.status!=null" style="color:green">Completed</td>
-                            <td><b-button variant="success" v-on:click="Donate(item.id)">Donate</b-button></td>
+                            <td><b-button variant="success" v-if="item.status!='completed'" v-on:click="Donate(item.id)">Donate</b-button></td>
                         
                         </tr>
                     </tbody>

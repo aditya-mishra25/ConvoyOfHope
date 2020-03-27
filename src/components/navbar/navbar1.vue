@@ -62,7 +62,6 @@
 				this.register=false;
 				this.signout = true;
 			} else {
-				this.$router.push('/login')
 				this.signin=true;
 				this.register=true;
 			}
