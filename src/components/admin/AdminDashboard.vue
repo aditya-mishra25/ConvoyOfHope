@@ -5,13 +5,13 @@
   <thead class="thead-dark">
     <tr>
       <th scope="col" class="collection-header">NGO's</th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-      <th scope="col"></th>
+      <th scope="col">Cause</th>
+      <th scope="col">Location</th>
+      <th scope="col">Established Date</th>
+      <th scope="col">Email ID</th>
+      <th scope="col">Contact</th>
+      <th scope="col">Documents</th>
+      <th scope="col">Delete</th>
 
     </tr>
   </thead>

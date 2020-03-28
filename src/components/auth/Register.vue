@@ -126,11 +126,9 @@ import db from '../../main';
             if(user.email == 'admin@me.com'){
               this.$router.push('/admindashboard')
             }
-            else{
-              this.$router.push('/ngoprofile/'+user.email)
-            }
+            
           } else {
-            this.$router.push('/login')
+            this.$router.push('/register')
           }
         });
     },
@@ -216,6 +214,16 @@ import db from '../../main';
                                             err=>{
                                                 alert(err.message);
                                             });
+
+                                            firebase.auth().signOut().then(function() {
+                                                    console.log('signout successful');
+                                                    location.reload()
+                                                    this.$router.push('/login')
+                                                }, function(error) {
+                                                // An error happened.
+                                            });
+                                            
+                                            
                                           }
                                           else{
                                               alert('Please upload file having extensions .jpeg/.jpg/.png/.gif only.')
@@ -252,6 +260,8 @@ import db from '../../main';
           else{
               alert("Name not valid") 
             } 
+
+            
               
       },
       upload:function(e){

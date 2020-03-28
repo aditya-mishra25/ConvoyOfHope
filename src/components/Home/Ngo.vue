@@ -4,7 +4,7 @@
       <div class="card-body block1">
               <h1>{{ngo.name}}</h1>
               <hr>
-              <h4>Casue: {{ngo.cause}}</h4>
+              <h4>Cause: {{ngo.cause}}</h4>
               <h4>Location: {{ngo.location}}</h4>
               <p>A Brief about the ngo.</p>
               

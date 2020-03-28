@@ -8,7 +8,7 @@
                 <div class="inner-all">
                     <ul class="list-unstyled">
                         <li class="text-center">
-                            <img class="img-circle img-responsive img-bordered-primary" :src="NGOs.imgurl" alt="John Doe" style="border-radius:50%; max-height:250px; max=width:250px; border:1px; margin-top:5px ">
+                            <img class="img-circle img-responsive img-bordered-primary" :src="NGOs.imgurl" alt="John Doe" style="border-radius:50%;max-width:250px; max-height:250px; max=width:250px; border:1px; margin-top:5px ">
                         </li>
                         <li class="text-center">
                             <h4 class="text-capitalize">{{NGOs.name}}</h4>
@@ -82,8 +82,8 @@
                         <tr>
                         <th scope="col">Title</th>
                         <th scope="col">Cause</th>
-                        <th scope="col">Delete</th>
-                        <th scope="col">Donate</th>
+                        <th scope="col">Status</th>
+                        <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -93,7 +93,7 @@
                             <td>{{item.reqcause}}</td>
                             <td v-if="item.status==null" style="color:red;">Pending</td>
                             <td v-if="item.status!=null" style="color:green">Completed</td>
-                            <td><b-button variant="success" v-if="item.status!='completed'" v-on:click="Donate(item.id)">Donate</b-button></td>
+                            <td><router-link :to="{name:'Donate' ,params:{id:item.id}}"><b-button variant="success" v-if="item.status!='completed'" v-on:click="Donate(item.id)">Donate</b-button></router-link></td>
                         
                         </tr>
                     </tbody>

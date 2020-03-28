@@ -5,14 +5,14 @@
   <thead class="thead-dark">
     <tr>
       <th scope="col" class="collection-header">NGO's</th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-      <th scope="col"></th>
+      <th scope="col">Cause</th>
+      <th scope="col">Location</th>
+      <th scope="col">Established Date</th>
+      <th scope="col">Email ID</th>
+      <th scope="col">Contact</th>
+      <th scope="col">Document</th>
+      <th scope="col">Delete</th>
+      <th scope="col">Accept</th>
 
 
 
@@ -100,6 +100,7 @@ import firebase from 'firebase'
                 }).then(function(docRef){
                     firebase.firestore().collection('NgoRequests').doc(id).delete().then(function(){
                         alert('This NGO is a part of our Organization now')
+                        this.location.reload();
                     })
                 }).catch(function(error){
                 console.log(error);

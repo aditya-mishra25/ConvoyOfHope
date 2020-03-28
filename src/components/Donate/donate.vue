@@ -10,6 +10,12 @@
         <b-form-group id="input-group-2" label="Contact:" label-for="input-2">
             <b-form-input id="input-1" v-model="custphone" type="number" required  placeholder="Enter Phone no."></b-form-input>
         </b-form-group>
+        <b-form-group id="input-group-2" label="Request:" label-for="input-2">
+            <label>{{Req.title}}</label>
+        </b-form-group>
+        <b-form-group id="input-group-2" label="Reason:" label-for="input-2">
+            <label>{{Req.brief}}</label>
+        </b-form-group>
         <b-form-group id="input-group-2" label="Amount:" label-for="input-2">
             <label>{{Req.amount}}$ i.e approx {{Req.amount*72}}Rs.</label>
         </b-form-group>
@@ -106,9 +112,18 @@ export default {
                 status:'completed'
             });
             this.$router.push('/')
+            alert('Thankyou for donating!! Amount is received');
+            Email.send({
+              SecureToken : "109d59d1-de1c-48fd-84ae-43bf1d0f5b87",
+                To : this.custemail,
+                From : "ConvoyofHope.org",
+                Subject : "Many Thanks",
+                Body : "Thankyou for your Donation sir/madam, your contribution counts!!"
+            });
           },
           onError: err => {
             console.log(err);
+            alert('Incorrect card details!!')
           }
         })
         .render(this.$refs.paypal);

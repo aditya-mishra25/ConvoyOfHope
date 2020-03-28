@@ -8,7 +8,7 @@
                 <div class="inner-all">
                     <ul class="list-unstyled">
                         <li class="text-center">
-                            <img class="img-circle img-responsive img-bordered-primary" :src="NGOs.imgurl" alt="John Doe" style="border-radius:50%; max-height:250px; max=width:250px; border:1px; margin-top:5px ">
+                            <img class="img-circle img-responsive img-bordered-primary" :src="NGOs.imgurl" alt="John Doe" style="border-radius:50%; max-width:250px; max-height:250px; max=width:250px; border:1px; margin-top:5px ">
                         </li>
                         <li class="text-center">
                             <h4 class="text-capitalize">{{NGOs.name}}</h4>
@@ -227,6 +227,7 @@ methods:{
         }
 
         this.reqtitle = this.reqcause = this.reqbrief= this.amount ='';
+        location.reload(true);
     },
     Delete(id){
         var y= confirm("Do you really want to delete the Request?");
