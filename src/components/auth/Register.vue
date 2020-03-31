@@ -121,16 +121,16 @@ import db from '../../main';
       }
     },
     created(){
-        firebase.auth().onAuthStateChanged(user=> {
-          if (user) {
-            if(user.email == 'admin@me.com'){
-              this.$router.push('/admindashboard')
-            }
+        // firebase.auth().onAuthStateChanged(user=> {
+        //   if (user) {
+        //     if(user.email == 'admin@me.com'){
+        //       this.$router.push('/admindashboard')
+        //     }
             
-          } else {
-            this.$router.push('/register')
-          }
-        });
+        //   } else {
+        //     this.$router.push('/register')
+        //   }
+        // });
     },
     methods:{
       register:function(e){
@@ -217,8 +217,8 @@ import db from '../../main';
 
                                             firebase.auth().signOut().then(function() {
                                                     console.log('signout successful');
-                                                    location.reload()
-                                                    this.$router.push('/login')
+                                                    // location.reload()
+                                                    // this.$router.push('/login')
                                                 }, function(error) {
                                                 // An error happened.
                                             });
