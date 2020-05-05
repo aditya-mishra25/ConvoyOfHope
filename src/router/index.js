@@ -5,15 +5,15 @@ import Home from '../components/Home/Home.vue'
 import Login from '../components/auth/Login.vue'
 import AdminDashboard from '../components/admin/AdminDashboard.vue'
 import AdminRequest from '../components/admin/NgoRequests.vue'
-import Demo from '../components/Demo.vue'
-import Demo2 from '../components/demo2.vue'
+// import Demo from '../components/Demo.vue'
+// import Demo2 from '../components/demo2.vue'
 import NgoProfile from '../components/NGO/NgoProfile.vue'
 import DemoRegister from '../components/auth/DemoRegister'
 import RequestCard from '../components/Home/RequestCard'
 import NgoEdit from '../components/NGO/NgoEdit'
 import ProfileUser from '../components/NGO/ProfileUSerView'
 import Donate from '../components/Donate/donate'
-import gethint from '../components/gethint'
+// import gethint from '../components/gethint'
 
 Vue.use(VueRouter)
 
